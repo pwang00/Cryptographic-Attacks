@@ -12,7 +12,7 @@ def hastad(ciphertexts, moduli, e=3):
     moduli = moduli array
     """
 
-    if len(moduli) == len(ciphertexts) == e:
+    if len(moduli) != len(ciphertexts) != e:
             raise RuntimeError("Moduli and ciphertext arrays have to be equal in length, and contain at least as many elements as e")
 
     M = crt(ciphertexts, moduli).nth_root(e)
