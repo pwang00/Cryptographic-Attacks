@@ -11,7 +11,6 @@ def hastad(ciphertexts, moduli, e=3):
 	ciphertexts = ciphertext array
 	moduli = moduli array
 	"""
-
 	if len(moduli) == len(ciphertexts) == e:
 		raise RuntimeError("Moduli and ciphertext arrays have to be equal in length, and contain at least as many elements as e")
 
