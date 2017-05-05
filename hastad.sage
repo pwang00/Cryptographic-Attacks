@@ -42,3 +42,7 @@ for i in range(e):
     print(moduli,ciphertexts)
 
 assert hastad(ciphertexts,moduli,e) == m
+
+#TODO: Add detection and solver for linear padding
+
+
