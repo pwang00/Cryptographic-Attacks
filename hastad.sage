@@ -29,13 +29,13 @@ def decode(message):
 
 m = convert_to_int("hello")
 e = 3
-
+bound = 2^1024
 ciphertexts = []
 moduli = []
 
 for i in range(e):
-	p = random_prime(1000000000000000000000)
-	q = random_prime(1000000000000000000000)
+	p = random_prime(bound,proof=false)
+	q = random_prime(bound,proof=false)
 	n = p*q
 	c = Integer(pow(m, e, n))
 	moduli.append(Integer(n))
