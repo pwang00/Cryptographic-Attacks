@@ -1,5 +1,5 @@
 """
-Sage implementation of Hastad's broadcast attack on large public exponent / small private key
+Sage implementation of Hastad's broadcast attack for small public exponent and multiple message/ciphertext pairs
 """
 
 import binascii
