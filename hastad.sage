@@ -1,5 +1,5 @@
 """
-Sage implementation of Hastad's broadcast attack on large public exponent / small private key
+Sage implementation of Hastad's broadcast attack for small public exponent and multiple message/ciphertext pairs
 """
 
 import binascii
@@ -74,6 +74,9 @@ def test_no_padding():
 
     assert hastad(ciphertexts,moduli,e) == m
     print("Success! The recovered message is equal to: " + hex(m)[2:].decode("hex"))
+
+    assert hastad(ciphertexts,moduli,e) == m
+    print("Success! The recovered message is equal to " + m)
     return 0
 
 def test_linear_padding():
