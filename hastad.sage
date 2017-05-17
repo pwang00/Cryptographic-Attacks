@@ -73,7 +73,7 @@ def test_no_padding():
         ciphertexts += [c]
 
     assert hastad(ciphertexts,moduli,e) == m
-    print("Success! The recovered message is equal to " + m)
+    print("Success! The recovered message is equal to: " + hex(m)[2:].decode("hex"))
     return 0
 
 def test_linear_padding():
