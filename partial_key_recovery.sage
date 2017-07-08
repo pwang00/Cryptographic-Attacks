@@ -25,7 +25,8 @@ def find_roots(f,b,N):
         q0 = (inverse_mod(Integer(p0),b) * Integer(p0)) % b
         print(q0)
         g = (b*x + p0) * (b*y + q0) - N
-        if prod(g.univariate_polynomial().roots()) == N:
+        '''Needs broken fix below'''
+        if prod(g.small_roots()) == N:
             return g.roots()
     return -1        
 
