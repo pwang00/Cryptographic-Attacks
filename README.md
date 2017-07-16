@@ -16,9 +16,10 @@ SageMathCell: http://sagecell.sagemath.org/  (useful as a quick go-to for evalua
 CoCalc: https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
 
-#Future Works
+# Future Works
 
 1. Finish implementing Partial Key Recovery and Coppersmith's method for finding small roots of multivariate polynomial definied over a ring
 2. Add Coppersmith's Short Pad Attack as an extension to Franklin-Reiter 
 3. Add Python implementations of existing programs
 
+Feel free to let me know if there are any bugs.
