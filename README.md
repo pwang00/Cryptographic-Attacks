@@ -1,6 +1,6 @@
 # RSA-Attacks
 
-Repository containing my Sage and/or implementation of attacks on the RSA Cryptosystem.  
+Repository containing my Sage and/or Python implementation of attacks on the RSA Cryptosystem.  
 
 # Overview
 
@@ -20,6 +20,8 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 
 Sage is regarded as being very difficult to install on Windows, since users need to download both VirtualBox and the Sage virtual machine in order to use its features.  Luckily, it does have a presence in the cloud.
 
+Below are two official cloud-based sage sites:
+
 SageMathCell:  
 http://sagecell.sagemath.org/  (useful as a quick go-to for evaluating Sage code without the need to save)
 
@@ -29,7 +31,7 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
 # Future Works
 
-1. Finish implementing Partial Key Recovery and Coppersmith's method for finding small roots of multivariate polynomial definied over a ring
+1. Finish implementing Partial Key Recovery and Coppersmith's method for finding small roots of multivariate polynomial defined over a ring
 2. Add Coppersmith's Short Pad Attack as an extension to Franklin-Reiter 
 3. Add Python implementations of existing programs
 4. Add OpenSSL parsing support
