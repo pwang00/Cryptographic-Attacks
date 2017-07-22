@@ -21,7 +21,7 @@ def recover(e,N):
                     return d
             else:
                 continue
-    print("[] Could not determine the value of d with the parameters given. Make sure that d < N ^ 0.25")
+    print("[] Could not determine the value of d with the parameters given. Make sure that d < 1/3 * N ^ 0.25")
     return -1
     
 
