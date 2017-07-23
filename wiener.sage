@@ -17,7 +17,7 @@ def recover(e,N):
                 
                 roots = zip(*f.roots())[0]
                 if len(roots) == 2 and prod(roots) == N:
-                    print("[x] Recovered! \nd = %0d" %d)
+                    print("[x] Recovered! \nd = %0x" %d)
                     return d
             else:
                 continue
