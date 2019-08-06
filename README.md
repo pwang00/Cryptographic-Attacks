@@ -28,6 +28,7 @@ http://sagecell.sagemath.org/  (useful as a quick go-to for evaluating Sage code
 CoCalc:  
 https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
+** Having been dead for over 2 years, I am now back!
 
 # Future Works
 
