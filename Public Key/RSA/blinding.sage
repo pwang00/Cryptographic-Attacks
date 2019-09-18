@@ -41,7 +41,7 @@ def test():
 
 	s_r = inverse_mod(r, N) * sign_message(pow(r, e, N) * target_m, N, d)
 	sig_of_2 = sign_message(2, N, d, deny=[])
-	
+
 	assert sig_of_2 == s_r
 
 	return s_r
