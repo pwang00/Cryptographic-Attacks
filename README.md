@@ -15,6 +15,7 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 3. Partial Key Recovery Attack (Unfinished) (Sage)
 4. Wiener's Attack for Small Public Exponent (Sage)
 5. Franklin-Reiter Related Message Attack (Sage)
+6. Blinding attack on Unpadded RSA (Sage)
 
 ### Note:
 
