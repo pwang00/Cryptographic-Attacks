@@ -19,6 +19,17 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 5. Franklin-Reiter Related Message Attack (Sage)
 6. Blinding attack on Unpadded RSA (Sage)
 
+# AES
+
+1. Byte-at-a-time ECB decryption
+2. AES-CBC Padding Oracle
+
+### Frequently Asked Questions
+
+Q: Why use SageMath instead of pure Python?
+
+A: Most of modern public key cryptography has some roots in Abstract Algebra (particularly group and ring theory) as well as number theory.  Sage provides excellent support for both fields of mathematics and provides many useful, time-saving functions so that the vast majority of time can be spent on implementing the actual attack algorithms rather than the structures that they are dependent upon.
+
 ### Note:
 
 Sage is regarded as being very difficult to install on Windows, since users need to download both VirtualBox and the Sage virtual machine in order to use its features.  Luckily, it does have a presence in the cloud.
