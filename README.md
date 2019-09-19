@@ -10,7 +10,9 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 
 # Currently Implemented Attacks
 
-## RSA 
+## Public Key Cryptosystems
+
+### RSA
 
 1. Generalized Hastad's broadcast attack (Sage) 
 2. Common modulus attack (Sage/Python)
@@ -19,7 +21,9 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 5. Franklin-Reiter Related Message Attack (Sage)
 6. Blinding attack on Unpadded RSA (Sage)
 
-# AES
+## Symmetric Key Ciphers 
+
+### AES
 
 1. Byte-at-a-time ECB decryption
 2. AES-CBC Padding Oracle
