@@ -1,7 +1,7 @@
 # Sage already comes built-in with a discrete logarithm function that uses a Pohlig-Hellman / BSGS backend. 
 # However, it can never hurt to implement the algorithm yourself for sake of understanding.
 
-def generate_params(B=2^13, num_factors=40):
+def generate_params(B=2^24, num_factors=40):
 	""" Generates the public and private parameters for Diffie-Hellman """
 
 	# Generates num_factors primes and multiplies them together to form a modulus 
@@ -9,7 +9,7 @@ def generate_params(B=2^13, num_factors=40):
 
 	# Currently the best way I can think of to generate primes p such that p - 1 is B-smooth
 	while not is_prime(p):
-		p = prod([random_prime(B, proof=False) for i in range(num_factors)]) + 1
+		p = 2 * prod([random_prime(B, proof=False) for i in range(num_factors)]) + 1
 
 	F = GF(p)
 	g, a, b = [F(randint(0, p)) for i in range(3)]
