@@ -44,11 +44,20 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
 # Future Works
 
+### Existing Attacks
 1. Finish implementing Partial Key Recovery and Coppersmith's method for finding small roots of multivariate polynomial defined over a ring
 2. Add Coppersmith's Short Pad Attack as an extension to Franklin-Reiter 
-3. Add Python implementations of existing programs
+3. Add Elliptic Curve support for Pohlig-Hellman
 4. Add OpenSSL parsing support
-4. Include explanations into each RSA attack
+5. Add explanations as comments
+6. Optimize existing attack scripts
+
+### Future Attacks
+1. (Maybe) Boneh-Durfee
+2. BLS Rogue Public Key Attack
+
+### Miscellaneous
+1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
 
 Feel free to let me know if there are any bugs.
 
