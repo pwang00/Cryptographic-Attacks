@@ -14,12 +14,13 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 
 ### RSA
 
-1. Generalized Hastad's broadcast attack (Sage) 
-2. Common modulus attack (Sage/Python)
-3. Partial Key Recovery Attack (Unfinished) (Sage)
-4. Wiener's Attack for Small Public Exponent (Sage)
-5. Franklin-Reiter Related Message Attack (Sage)
-6. Blinding attack on Unpadded RSA (Sage)
+1. Generalized Hastad's broadcast attack
+2. Common modulus attack
+3. Partial Key Recovery Attack (Unfinished)
+4. Wiener's Attack for Small Public Exponent
+5. Franklin-Reiter Related Message Attack
+6. Blinding attack on Unpadded RSA
+7. Fault attack on RSA-CRT
 
 ### Diffie Hellman
 
@@ -59,6 +60,7 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 ### Future Attacks
 1. (Maybe) Boneh-Durfee
 2. BLS Rogue Public Key Attack
+3. Fault attack on standard (non-CRT) RSA
 
 ### Miscellaneous
 1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
