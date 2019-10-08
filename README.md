@@ -10,7 +10,7 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 
 # Currently Implemented Attacks
 
-## Public Key Cryptosystems
+## Public (Asymmetric) Key Cryptographic Schemes
 
 ### RSA
 
@@ -20,6 +20,10 @@ Capture the Flag competitions (CTF) are one of the most common ways of educating
 4. Wiener's Attack for Small Public Exponent (Sage)
 5. Franklin-Reiter Related Message Attack (Sage)
 6. Blinding attack on Unpadded RSA (Sage)
+
+### Diffie Hellman
+
+1. Pohlig-Hellman attack for finding discrete logarithms in cyclic groups with smooth order
 
 ## Symmetric Key Ciphers 
 
