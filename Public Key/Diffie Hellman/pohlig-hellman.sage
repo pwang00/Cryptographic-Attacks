@@ -2,7 +2,7 @@
 # However, it can never hurt to implement the algorithm yourself for sake of understanding.
 
 
-def generate_params(B=2^20, num_factors=15):
+def generate_params(B=2^10, num_factors=15):
 	""" Generates the public and private parameters for Diffie-Hellman """
 
 	# Generates num_factors primes and multiplies them together to form a modulus 
@@ -28,7 +28,9 @@ def generate_params(B=2^20, num_factors=15):
 
 def BSGS(g, A, G):
 	n = G.order() - 1
-	m = ceil(sqrt(n))
+
+	# Normally ceil(sqrt(n)) should work but for some reason some test cases break this
+	m = ceil(sqrt(n)) + 1
 	y = A
 	log_table = {}
 
@@ -72,6 +74,8 @@ def pohlig_hellman(g, A, F, debug=True):
 		if debug and x_i != None:
 			print("[x] Found discrete logarithm %d for factor %d" % (x_i, p_i))
 			crt_array += [x_i]
+		elif x_i == None:
+			print("[] Did not find discrete logarithm for factor %d" % p_i)
 
 
 	return crt(crt_array, factors)
@@ -90,4 +94,9 @@ def test():
 if __name__ == "__main__":
 	test()
 
+# Test case that broke BSGS (missed calculating the discrete logarithm for p = 2 apparently)
 
+#F = GF(57709937095736748707766266121061070270736984391755037161746092145800428699901267064992500100452120323)
+#g = F(6862230423439704800599635372588241766443241516687730839067524319148439812277727596294137046769507421)
+#A = F(35109578903356652282583091316434534076329783688364219256182342958633264942467664701017935316905285284)
+	
