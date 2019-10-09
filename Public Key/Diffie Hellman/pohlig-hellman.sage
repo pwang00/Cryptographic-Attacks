@@ -1,6 +1,7 @@
 # Sage already comes built-in with a discrete logarithm function that uses a Pohlig-Hellman / BSGS backend. 
 # However, it can never hurt to implement the algorithm yourself for sake of understanding.
 
+
 def generate_params(B=2^20, num_factors=15):
 	""" Generates the public and private parameters for Diffie-Hellman """
 
@@ -19,10 +20,38 @@ def generate_params(B=2^20, num_factors=15):
 	assert A^b == B^a and gcd(g, p - 1) == 1
 	return g, A, B, F
 
+# The Baby-Step Giant Step (BSGS) algorithm helps reduce the complexity of calculating the discrete logarithm
+# g_i^x_i mod p_i = h_i to O(sqrt(p_i)) instead of O(p_i) with traditional brute force.  The way BSGS works is that
+# We rewrite the discrete logarithm x_i in terms of im + j, where m = ceil(sqrt(n)).  This allows for a meet-in-the-middle
+# style calculation of $x$--namely, we first calculate g^j mod p for every 0 <= j < m, and then calculate g^i mod p for 
+# 0 <= j <= p, multiplying by a^-m for every y not equal to 
+
+def BSGS(g, A, G):
+	n = G.order() - 1
+	m = ceil(sqrt(n))
+	y = A
+	log_table = {}
+
+	for j in range(m):
+		log_table[j] = (j, g^j)
+
+	inv = g^-m
+	
+	for i in range(m):
+		for x in log_table.keys():
+			if log_table[x][1] == y:
+				return i * m + log_table[x][0]
+	
+		y *= inv
+
+	return None
+
 # The Pohlig-Hellman attack on Diffie-Hellman works as such:
-# Given the generator, public keys of Alice and Bob, as well as the multiplicative order
-# Of the group, one can factor the group order (which by construction here is B-smooth) into 
-# Small primes.  
+# Given the generator, public keys of either Alice or Bob, as well as the multiplicative order
+# Of the group (which in Diffie-Hellman is p - 1 due to prime modulus), 
+# one can factor the group order (which by construction here is B-smooth) into 
+# Small primes.  By Lagrange's theorem, we have that
+
 
 def pohlig_hellman(g, A, F, debug=True):
 	""" Attempts to use Pohlig-Hellman to compute discrete logarithm of A = g^a mod p"""
@@ -39,13 +68,11 @@ def pohlig_hellman(g, A, F, debug=True):
 	for p_i in factors:
 		g_i = g ^ ((p - 1) // p_i)
 		h_i = A ^ ((p - 1) // p_i)
-		for x_i in range(0, p_i):
-			if g_i ^ x_i == h_i:
-				crt_array += [x_i]
+		x_i = BSGS(g_i, h_i, GF(p_i))
+		if debug and x_i != None:
+			print("[x] Found discrete logarithm %d for factor %d" % (x_i, p_i))
+			crt_array += [x_i]
 
-				if debug:
-					print("[x] Found discrete logarithm %d for factor %d" % (x_i, p_i))
-				break
 
 	return crt(crt_array, factors)
 
