@@ -27,8 +27,8 @@ def sign(m, N, p, q, e, dp, dq, qinv, pinv, error_prob=1):
 
 	return s
 
-# The attacker will already know m1 and m2 since he's trying to obtain signatures for them
-# With sufficently high probability, gcd(s1 - m1, s2 - m2) will reveal one of the factors of N
+# The attacker will already know m1 since he's trying to obtain signatures for them
+# With sufficently high probability, gcd(s1 - m1, N) will reveal one of the factors of N
 def factor_n(s1, e, m1, N):
 	p = 1
 	q = gcd(s1^e - m1, N)
