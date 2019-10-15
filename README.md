@@ -61,6 +61,7 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 1. (Maybe) Boneh-Durfee
 2. BLS Rogue Public Key Attack
 3. Fault attack on standard (non-CRT) RSA
+4. Small-subgroup confinement attack on Diffie-Hellman
 
 ### Miscellaneous
 1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
