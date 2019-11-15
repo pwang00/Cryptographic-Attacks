@@ -63,6 +63,7 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 3. Fault attack on standard (non-CRT) RSA
 4. Small-subgroup confinement attack on Diffie-Hellman
 5. Linear / Differential cryptanalysis against DES/AES
+6. Invalid point attacks on Elliptic Curve Diffie-Hellman
 
 ### Miscellaneous
 1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
