@@ -59,11 +59,13 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
 ### Future Attacks
 1. (Maybe) Boneh-Durfee
-2. BLS Rogue Public Key Attack
+2. BLS rogue public key attack
 3. Fault attack on standard (non-CRT) RSA
 4. Small-subgroup confinement attack on Diffie-Hellman
-5. Linear / Differential cryptanalysis against DES/AES
+5. Linear / differential cryptanalysis against DES/AES
 6. Invalid point attacks on Elliptic Curve Diffie-Hellman
+7. State recovery on linear congruential generators (LCGs), truncated and non-truncated
+8. State recovery on linear feedback shift registers (LFSRs)
 
 ### Miscellaneous
 1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
