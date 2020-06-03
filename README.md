@@ -1,4 +1,4 @@
-# Cryptographic-Attacks
+# Crypto is Cool
 
 Repository containing my Sage and/or Python implementations of attacks on popular ciphers and public key cryptosystems.
 
