@@ -15,7 +15,6 @@ def coppersmith_short_pad(C1, C2, N, e = 3, eps = 1/100):
 	# convert the resulting polynomial to its univariate form and take the coefficients modulo N
 	# Then we can call the sage's small_roots function and obtain the delta between m_1 and m_2.
 
-
 	roots = res.univariate_polynomial().change_ring(Zmod(N))\
 		.small_roots(epsilon = epsilon)
 
