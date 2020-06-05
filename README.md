@@ -4,9 +4,7 @@ Repository containing my Sage and/or Python implementations of attacks on popula
 
 # Overview
 
-RSA is a highly popular public key cryptosystem (PKC) that is used in scenarios ranging from secure communications to data encryption.  Due to its popularity, it has been subject to rigorous cryptanalysis to ensure that it is up to standard.  Several attacks have, under certain conditions, compromised the security of RSA in the 30+ years that the cryptosystem has existed.  Thus, understanding the attacks is crucial to avoid trivial mistakes when choosing RSA parameters.  
-
-Capture the Flag competitions (CTF) are one of the most common ways of educating players on RSA attacks, and the files in this repository are intended to be a proof-of-concept of these attacks, which appear often (albeit with several twists) on CTFs.  
+TODO: Update description to something that better reflects the purpose of this repository, as a lot has changed from "RSA-Attacks".
 
 # Currently Implemented Attacks
 
