@@ -15,7 +15,7 @@ def recover(e,N):
             if b > 0 and b.is_square():
                 d = d0
                 
-                roots = zip(*f.roots())[0]
+                roots = list(zip(*f.roots()))[0]
                 if len(roots) == 2 and prod(roots) == N:
                     print("[x] Recovered! \nd = %0x" %d)
                     return d
