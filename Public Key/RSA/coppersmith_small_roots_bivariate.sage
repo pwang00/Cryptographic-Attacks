@@ -18,23 +18,25 @@
 
 # Inputs:
 
-# X, Y, p(x, y)
+# X, Y, k, p(x, y)
 
 # Outputs: The small roots x_0, y_0 of h(x, y) such that |x_0| <= X, |y_0| <= Y, and h(x_0, y_0) = 0 over Z
 
 import itertools
 
-def coppersmith_bivariate(p, X, Y, debug=True):
+def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
 
-
-    if debug:
-        print(f"Attempting to find small roots for polynomial {p} over Z...")
-        
+    if len(p.variables()) != 2:
+        raise ValueError("Given polynomial is not bivariate.")
     # We want to make sure that XY < W = max_ij(p_ij x^i y^j), otherwise there may not be a solution.
     d = max(p.degree(x), p.degree(y))
     W = 0
 
     w = len(p.coefficients())
+
+    if debug:
+        print(f"Attempting to find small roots for the given polynomial over Z...")
+        print(f"With parameters k = {k}, i_0 = {i_0}, j_0 = {j_0}")
 
     # Iterate through all the monomials of p to calculate W
     for term in p:
@@ -44,12 +46,8 @@ def coppersmith_bivariate(p, X, Y, debug=True):
     
     if debug and X * Y > W^(2/(3*d)):
         print("Warning: XY > W^(2/(3*d)); a solution may not be found.")
-
-    k = 2
-
-    # i_0, j_0 satisfy 0 <= i_0, j_0 <= d
-    i_0, j_0 = (1, 1)
     
+
     prods = list(itertools.product(range(k), range(k)))[::-1]
     prods_kd = list(itertools.product(range(k + d), range(k + d)))[::-1]
     terms = sorted([x^(i + i_0)*y^(j + j_0) for i, j in prods], reverse=True)
@@ -81,8 +79,9 @@ def coppersmith_bivariate(p, X, Y, debug=True):
         S[r] = row
 
     n = det(S)
-    # Builds the matrix M by stacking the S and R blocks.  The S block is 
-    X_dim, Y_dim = k^2, (k + d)^2
+
+    # Builds the matrix M
+    X_dim, Y_dim = k^2 + (k + d)^2, (k + d)^2
     
     M = Matrix(ZZ, X_dim, Y_dim)
     for r, (a, b) in enumerate(prods):
@@ -92,19 +91,16 @@ def coppersmith_bivariate(p, X, Y, debug=True):
         row = vector([s_dict[t] * t(x=X, y=Y) if t in s_dict else 0 for t in s_terms])
         M[r] = row
 
-    R = Matrix(ZZ, (k + d)^2, Y_dim)
-
-    for r, (i, j) in zip(range((k + d)^2), prods_kd):
+    for r, (i, j) in zip(range(k^2, X_dim), prods_kd):
         r_ab = x^i * y^j * n
         coeffs, mons = zip(*list(r_ab))
         r_dict = {k: v for k, v in zip(mons, coeffs)}
         row = vector([n * t(x=X, y=Y) if t in r_dict else 0 for t in s_terms])
-        R[r] = row
+        M[r] = row
 
-    R = R.echelon_form()
-
-    # M after stacking is now k^2 + (k + d)^2 by (k + d)^2.
-    M = M.stack(R).hermite_form()
+    # Coron describes a triangularization algorithm to triangularize M, but claims that obtaining the
+    # Hermite normal form of M works as well, so we do the latter.
+    M = M.hermite_form()
 
     l = len(rest)
     L_2 = M[list(range(k^2, k^2 + l)), list(range(k^2, k^2 + l))]
@@ -126,7 +122,45 @@ def coppersmith_bivariate(p, X, Y, debug=True):
     
 
 if __name__ == "__main__":
-    P.<x, y> = PolynomialRing(ZZ)
-    p = 127*x*y - 1207*x - 1461*y + 21
 
-    print(coppersmith_bivariate(p, 30, 20))
+    # Factors N = pq given the most significant bits of p and q.
+    P.<x, y> = PolynomialRing(ZZ)
+    prime_size = 512
+    p = random_prime(1<<prime_size, proof=False)
+    q = random_prime(1<<prime_size, proof=False)
+
+    N = p * q
+
+    # Lower bits of p
+    lower = 300
+    bits = prime_size - lower
+    mask = 1 << bits
+    # How many MSBs we want to preserve
+    # p // mask * mask zeros out log_2(mask) number of LSBs of p 
+    
+    p_0 = (p // mask)
+    q_0 = N // (p_0 * mask) // mask
+
+    X, Y = mask << 1, mask << 1
+    poly = (x + p_0 * mask)*(y + q_0 * mask) - N
+
+    print("--Given arguments--")
+    print(f"Size of primes: {prime_size}")
+    print(f"Number of known MSBs of p: {bits}")
+    print(f"N = {N}")
+    print("\n")
+    res = coppersmith_bivariate(poly, X, Y, k=4)
+    print("\n")
+    if not res:
+        raise ValueError("No roots found.")
+    
+    x_0, y_0 = res
+    p_r = p_0 * mask + x_0[0]
+    q_r = q_0 * mask + y_0[0]
+
+    assert p_r * q_r == N, "Recovered values were incorrect."
+
+    print(f"Successfully factored N!")
+    print(f"p = {p_r}")
+    print(f"q = {q_r}")
+
