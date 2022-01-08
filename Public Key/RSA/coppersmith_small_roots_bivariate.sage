@@ -14,7 +14,7 @@
 
 # Given some p(x, y) in Z[x, y], we can fix some arbitrary integer n and construct a lattice of polynomials 
 # that are multiples of p(x, y) and n, and then reduce this lattice to obtain a polynomial h(x, y) with small coefficients such that 
-# if h(x_0, y_0) = 0 (mod n) for some arbitrary integer n, then h(x_0, y_0) = 0 over Z holds as well.
+# if h(x_0, y_0) = 0 (mod n) for some arbitrary integer n, then h(x_0, y_0) = 0 over Z holds as well. 
 
 # Inputs:
 
@@ -52,6 +52,9 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
     prods_kd = list(itertools.product(range(k + d), range(k + d)))[::-1]
     terms = sorted([x^(i + i_0)*y^(j + j_0) for i, j in prods], reverse=True)
     
+    # Generates a temporary polynomial via expanding (1 + x + x^2 + ... + x^n)(1 + y + y^2 + ... + y^n)
+    # Later filters out the monomial terms whose degrees in x and y independently exceed 
+    # The highest order term across all x^(i + i_0)*y^(j + j_0).
     f = sum(x^i for i in range(terms[0].degree() // 2 + 2))
     f *= f(x=y)
     
