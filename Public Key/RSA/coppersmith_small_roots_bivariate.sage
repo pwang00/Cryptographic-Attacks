@@ -59,18 +59,19 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
     d2 = max(highest_order.degree(x), highest_order.degree(y))
 
     # Make sure the left block of M corresponds to the coefficients of
-    # the monomials that we care about
+    # the monomials that we care about; the ones we do are stored in `terms`
+    # and the others are stored in `rest`.
+    # We restrict the maximum degree independently in x, y of all terms to be less than that 
+    # of the highest order term across all x^(i + i_0)*y^(j + j_0).
     rest = [t for t in list(zip(*list(f)))[1] if max(t.degree(x), t.degree(y)) <= d2 and t not in terms]
     s_terms = terms + rest    
-    
-    r_terms = sorted([x^i*y^j for i, j in prods_kd], reverse=True)
 
     # Builds the matrix S and calculates n = |det S|; since S is triangular with diagonal
     # a, this evaluates to a^(k^2).
-    # We start with a matrix 
     X_dim, Y_dim = k^2, k^2
     S = Matrix(ZZ, X_dim, Y_dim)
 
+    # Puts the coefficients corresponding to each monomial in order for every row of S.
     for r, (a, b) in enumerate(prods):
         s_ab = x^a * y^b * p
         coeffs, mons = zip(*list(s_ab))
@@ -80,9 +81,12 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
 
     n = det(S)
 
-    # Builds the matrix M
+    # Builds the matrix M as described in the paper, which is k^2 + (k + d)^2 x (k + d)^2
+    # The first k^2 rows of M consist of the coefficients of the polynomials s_ab(xX, yY) where
+    # 0 <= a, b <= d.
     X_dim, Y_dim = k^2 + (k + d)^2, (k + d)^2
-    
+
+    # Puts the coefficients corresponding to each monomial in order for every row of S.    
     M = Matrix(ZZ, X_dim, Y_dim)
     for r, (a, b) in enumerate(prods):
         s_ab = x^a * y^b * p
@@ -90,6 +94,10 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
         s_dict = {k: v for k, v in zip(mons, coeffs)}
         row = vector([s_dict[t] * t(x=X, y=Y) if t in s_dict else 0 for t in s_terms])
         M[r] = row
+
+    # The next (k + d)^2 rows consist of the coefficients of the polynomials r_ab where
+    # 0 <= a, b <= k + d.  Again, the coefficients for each r_ab are inserted in order corresponding
+    # To each monomial term.
 
     for r, (i, j) in zip(range(k^2, X_dim), prods_kd):
         r_ab = x^i * y^j * n
@@ -99,17 +107,31 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
         M[r] = row
 
     # Coron describes a triangularization algorithm to triangularize M, but claims that obtaining the
-    # Hermite normal form of M works as well, so we do the latter.
+    # Hermite normal form of M works as well, so we do the latter since Sage already has it implemented.
     M = M.hermite_form()
 
+    # As mentioned above, `rest` contains the monomials other than the k^2 ones we chose at the beginning.
     l = len(rest)
-    L_2 = M[list(range(k^2, k^2 + l)), list(range(k^2, k^2 + l))]
-    
-    L_2 = L_2.LLL()
+
+    # Performs LLL on L_2
+    L_2 = M[list(range(k^2, k^2 + l)), list(range(k^2, k^2 + l))].LLL()
+
+    # The first row of the LLL-reduced L_2 contains a short vector of coefficients b_1
+    # corresponding to the coefficients of a polynomial h(x, y) that is not a multiple of p(x, y).
+    # Irreducibility of p(x, y) implies that p(x, y) and h(x, y) are algebraically independent 
+    # and that they share a root (x_0, y_0).
+
+    # Builds h(x, y) by summing the products of monomials and their coefficient terms, and dividing out by 
+    # the extra factors of X^i*Y^j.
     h = sum(coeff * term // (X^term.degree(x) * Y^term.degree(y)) for (coeff, term) in zip(L_2[0], rest))
+
+    # Takes the resultant of h(x, y) and p(x, y).
     q = h.resultant(p, variable=y)
     
+    # Obtains the roots x_i of q as a univariate polynomial in x over Z if they exist.  Sage implements this via .roots()
+    # Then finds roots for q(x_i, y) as a univariate polynomial in y over Z if they exist.
     roots_x = q.univariate_polynomial().roots(multiplicities=False)
+
     roots_y = []
     for x_0 in roots_x:
         y_0 = p(x=x_0).univariate_polynomial().roots(multiplicities=False)
