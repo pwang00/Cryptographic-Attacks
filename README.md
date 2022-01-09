@@ -12,51 +12,63 @@ TODO: Update description to something that better reflects the purpose of this r
 
 ### RSA
 
+#### Finished
+
 1. Generalized Hastad's broadcast attack
 2. Common modulus attack
-3. Partial Key Recovery Attack (Unfinished)
-4. Wiener's Attack for Small Public Exponent
-5. Franklin-Reiter Related Message Attack
-6. Blinding attack on Unpadded RSA
-7. Fault attack on RSA-CRT
+3. Wiener's Attack for Small Public Exponent
+4. Franklin-Reiter Related Message Attack
+5. Blinding attack on Unpadded RSA
+6. Fault attack on RSA-CRT
+7. Coron's simplification of Coppersmith's root finding algorithm for bivariate polynomials in Z[x, y]
+
+#### Unfinished
+1. Partial Key Recovery Attack with bits of `d` known
 
 ### Diffie Hellman
 
-1. Pohlig-Hellman attack for finding discrete logarithms in cyclic groups with smooth order
+#### Finished
+
+1. Pohlig-Hellman attack for finding discrete logarithms in cyclic multiplicative groups with smooth order
+2. Pohlig-Hellman attack for finding discrete logarithms in elliptic curve additive groups with smooth order
 
 ## Symmetric Key Ciphers 
 
 ### AES
+
+#### Finished
 
 1. Byte-at-a-time ECB decryption
 2. AES-CBC Padding Oracle
 
 ### Note:
 
-Sage is regarded as being very difficult to install on Windows, since users need to download both VirtualBox and the Sage virtual machine in order to use its features.  Luckily, it does have a presence in the cloud.
+SageMath is available on both Windows and Un*x.
 
-Below are two official cloud-based sage sites:
+To install SageMath on Windows, download an installer from the following link: https://github.com/sagemath/sage-windows/releases
+
+To install on Ubuntu and other Linux distros, I believe `sudo apt install sagemath`, or something along those lines will get the job done.
+
+SageMath also has a presence in the cloud:
 
 SageMathCell:  
-http://sagecell.sagemath.org/  (useful as a quick go-to for evaluating Sage code without the need to save)
+http://sagecell.sagemath.org/  (useful as a quick go-to for evaluating Sage code without the need to save, also be mindful of no external connections)
 
 CoCalc:  
 https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
-** Having been dead for over 2 years, I am now back!
+You may also host your own SageMath server 
 
 # Future Works
 
 ### Existing Attacks
-1. Finish implementing Partial Key Recovery and Coppersmith's method for finding small roots of multivariate polynomial defined over a ring
-2. Add Coppersmith's Short Pad Attack as an extension to Franklin-Reiter 
-3. Add Elliptic Curve support for Pohlig-Hellman
-4. Add OpenSSL parsing support
-5. Add explanations as comments
-6. Optimize existing attack scripts
+1. Add Coppersmith's Short Pad Attack as an extension to Franklin-Reiter 
+2. Add OpenSSL parsing support
+3. Add explanations as comments
+4. Optimize existing attack scripts
 
 ### Future Attacks
-1. (Maybe) Boneh-Durfee
+1. Boneh-Durfee
 2. BLS rogue public key attack
 3. Fault attack on standard (non-CRT) RSA
 4. Small-subgroup confinement attack on Diffie-Hellman
@@ -67,6 +79,7 @@ https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
 ### Miscellaneous
 1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
+2. (Maybe) Add more general purpose scripts that may prove useful for breaking some cryptographic schemes
 
 Feel free to let me know if there are any bugs.
 
