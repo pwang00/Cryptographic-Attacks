@@ -28,11 +28,10 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
 
     if len(p.variables()) != 2:
         raise ValueError("Given polynomial is not bivariate.")
+
     # We want to make sure that XY < W = max_ij(p_ij x^i y^j), otherwise there may not be a solution.
     d = max(p.degree(x), p.degree(y))
     W = 0
-
-    w = len(p.coefficients())
 
     if debug:
         print(f"Attempting to find small roots for the given polynomial over Z...")
@@ -54,7 +53,7 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
     
     # Generates a temporary polynomial via expanding (1 + x + x^2 + ... + x^n)(1 + y + y^2 + ... + y^n)
     # Later filters out the monomial terms whose degrees in x and y independently exceed 
-    # The highest order term across all x^(i + i_0)*y^(j + j_0).
+    # the highest order term across all x^(i + i_0)*y^(j + j_0).
     f = sum(x^i for i in range(terms[0].degree() // 2 + 2))
     f *= f(x=y)
     
@@ -69,8 +68,7 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
     rest = [t for t in list(zip(*list(f)))[1] if max(t.degree(x), t.degree(y)) <= d2 and t not in terms]
     s_terms = terms + rest    
 
-    # Builds the matrix S and calculates n = |det S|; since S is triangular with diagonal
-    # a, this evaluates to a^(k^2).
+    # Builds the matrix S and calculates n = |det S|.
     X_dim, Y_dim = k^2, k^2
     S = Matrix(ZZ, X_dim, Y_dim)
 
