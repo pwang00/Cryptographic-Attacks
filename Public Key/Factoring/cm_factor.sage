@@ -5,7 +5,7 @@ sys.setrecursionlimit(100000000)
 
 def cm_factor(N, D, B=32, debug=True):
     """
-    Implements a simplified version of Cheng's 4p - 1 complex multiplication factorization algorithm.
+    Implements a simplified version of Cheng's 4p - 1 elliptic curve complex multiplication based factorization algorithm.
     Targets moduli where one (or many) prime factors satisfies the equality 4p_i - 1 = D * s^2, where D is a squarefree integer
     and s is a randomly generated one between an upper and lower bound.
     
