@@ -15,25 +15,26 @@ def cm_factor(N, D, B=32, debug=True):
     :param N: integer to be factored
     :param D: squarefree integer satisfying 4p - 1 = D * s^2
     :param B: number of iterations to run the algorithm for
+    :param debug: switches debugging information on/off
     :return: a tuple corresponding to p, q, or failure (-1)
     """
 
     # If D is not squarefree then we terminate immediately.
     assert D.is_squarefree(), "D must be squarefree."
 
-    # Computes the -Dth Hilbert polynomial modulo N and quotient ring Q = Z_n[x] / <H_{-D, n}>
+    # Computes the -Dth Hilbert polynomial modulo N and quotient ring Q = Z_N[x] / <H_{-D, N}>
 
-    Z_n = Zmod(N)
-    P = Z_n[x]
+    Z_N = Zmod(N)
+    P = Z_N[x]
     H = P(hilbert_class_polynomial(-D))
     Q = P.quotient_ring(H)
 
     # j is the equivalence class corresponding to [X] in Q.
     j = Q(x)
 
-    # The paper claims that we can treat both 1728 - j and H as polynomials in Z_n[X] and calculate the inverse of
+    # The paper claims that we can treat both 1728 - j and H as polynomials in Z_N[X] and calculate the inverse of
     # 1728 - j and H via egcd. This doesn't quite work off the shelves, so we instead accomplish this by treating 
-    # 1728 - j as an element of Q = Z_n[x] / <H_{-D, n}> and lifting it back into the base ring.  
+    # 1728 - j as an element of Q = Z_N[x] / <H_{-D, n}> and lifting it back into the base ring.  
     # Sage implements this via the .lift() method.
 
     if debug:
@@ -51,8 +52,8 @@ def cm_factor(N, D, B=32, debug=True):
 
     for i in range(B):
 
-        # Obtains a random element from Z_n for the division polynomial.
-        x_i = Z_n.random_element()
+        # Obtains a random element from Z_N for the division polynomial.
+        x_i = Z_N.random_element()
 
         if debug:
             print("Calculating division polynomial with x_i...")
