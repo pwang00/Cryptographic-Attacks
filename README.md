@@ -14,17 +14,17 @@ As of yet, there are implementations for attacks against public key and symmetri
 
 - [x] [Generalized Hastad's broadcast attack](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/hastad.sage)
 - [x] [Common modulus attack](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/common_modulus.py)
-- [x] [Wiener's attack for small `d`](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/wiener.sage)
+- [x] [Wiener's attack for small d](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/wiener.sage)
 - [x] [Blinding attack on Unpadded RSA signatures](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/blinding.sage)
 - [x] [Fault attack on RSA-CRT](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/fault_attack.sage)
 - [x] [Franklin-Reiter related message attack + Coppersmith short pad attack](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/coppersmith_short_pad.sage)
 - [x] [Coron's simplification of Coppersmith's root finding algorithm for bivariate polynomials in Z[x, y]](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/coron.sage)
-- [ ] Partial Key Recovery Attack with bits of `d` known
+- [ ] Partial Key Recovery Attack with bits of d known
 
 ### Diffie-Hellman
 
-- [x] Pohlig-Hellman attack for finding discrete logarithms in cyclic multiplicative groups with smooth order
-- [x] Pohlig-Hellman attack for finding discrete logarithms in elliptic curve additive groups with smooth order
+- [x] [Pohlig-Hellman attack for finding discrete logarithms in cyclic multiplicative groups with smooth order](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/Diffie%20Hellman/pohlig_hellman.sage)
+- [x] [Pohlig-Hellman attack for finding discrete logarithms in elliptic curve additive groups with smooth order](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/Diffie%20Hellman/pohlig_hellman_EC.sage)
 - [ ] Small-subgroup confinement attack
 
 ### Factoring algorithms (applicable for many public key primitives)
@@ -60,7 +60,7 @@ It is also possible to host a personal SageMath server, though I have never trie
 
 # Current Notes
 
-The Notes directory contains my notes on miscellaneous cryptography-related topics.  As of now, I have written up a summary of the first few chapters of Craig Costello's [Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf) and a SageMath script demonstrating elliptic curve point addition and doubling in projective coordinates.
+The [Notes](https://github.com/pwang00/Cryptographic-Attacks/tree/master/Public%20Key/Notes/) directory contains my notes on miscellaneous cryptography-related topics.  As of now, I have written up a [summary](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/Notes/Elliptic%20Curves/Pairings/Pairings_For_Beginners_Notes.pdf) of the first few chapters of Craig Costello's [Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf) and a SageMath [script](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/Notes/Elliptic%20Curves/Pairings/affine_to_projective.sage) demonstrating elliptic curve point addition and doubling in projective coordinates.
 
 # Future Works
 
@@ -69,7 +69,7 @@ The Notes directory contains my notes on miscellaneous cryptography-related topi
 2. Implement the MOV attack for elliptic curves of low embedding degree.
 
 ### Future Attacks
-1. Boneh-Durfee attack for `d <= N^0.292`
+1. Boneh-Durfee attack for d < N^0.292
 2. BLS rogue public key attack
 3. Fault attack on standard (non-CRT) RSA
 4. Small-subgroup confinement attack on Diffie-Hellman
@@ -98,3 +98,4 @@ A: Most of modern public key cryptography has some roots in Abstract Algebra (pa
 [Cheng's 4p - 1 elliptic curve complex multiplication based factoring](https://crocs.fi.muni.cz/_media/public/papers/2019-secrypt-sedlacek.pdf)
 [Craig Costello's Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf)
 [20 years of attacks on RSA](https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf)
+
