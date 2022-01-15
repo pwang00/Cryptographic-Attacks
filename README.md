@@ -1,47 +1,46 @@
 # Cryptographic Attacks
 
-Repository containing my Sage and/or Python implementations of attacks on popular ciphers and public key cryptosystems.
+Repository containing my Sage and/or Python implementations of attacks on popular ciphers and public key cryptosystems.  
 
 # Overview
 
-TODO: Update description to something that better reflects the purpose of this repository, as a lot has changed from "RSA-Attacks".
+As of yet, there are implementations for attacks against public key and symmetric key cryptographic primitives, which include RSA, Diffie-Hellman and its elliptic curve variant, AES-ECB, and AES-CBC.  There are also miscellaneous factoring attacks, which may be applicable for targeting many public key schemes, and some notes on topics such as elliptic curve pairings.  I plan to finish all existing public key attacks in the future and significantly expand attack support for symmetric key primitives, as the latter has been relatively lacking for the past few years.  Additionally, I aim to add more general purpose algorithms in the domains of factoring, non-cryptographically secure PRNG state recovery such as ones that use linear congruential generators (LCGs) or linear-feedback shift registers (LFSRs), and more, the reason being that this allows for more flexibility when attacking cryptographic primitives.
 
 # Currently Implemented Attacks
 
-## Public (Asymmetric) Key Cryptographic Schemes
+## Public Key Cryptographic Schemes
 
 ### RSA
 
-#### Finished
+- [x] [Generalized Hastad's broadcast attack](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/hastad.sage)
+- [x] [Common modulus attack](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/common_modulus.py)
+- [x] [Wiener's attack for small `d`](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/wiener.sage)
+- [x] [Blinding attack on Unpadded RSA signatures](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/blinding.sage)
+- [x] [Fault attack on RSA-CRT](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/fault_attack.sage)
+- [x] [Franklin-Reiter related message attack + Coppersmith short pad attack](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/coppersmith_short_pad.sage)
+- [x] [Coron's simplification of Coppersmith's root finding algorithm for bivariate polynomials in Z[x, y]](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/RSA/coron.sage)
+- [ ] Partial Key Recovery Attack with bits of `d` known
 
-1. Generalized Hastad's broadcast attack
-2. Common modulus attack
-3. Wiener's Attack for Small Public Exponent
-4. Franklin-Reiter Related Message Attack
-5. Blinding attack on Unpadded RSA
-6. Fault attack on RSA-CRT
-7. Coron's simplification of Coppersmith's root finding algorithm for bivariate polynomials in Z[x, y]
+### Diffie-Hellman
 
-#### Unfinished
-1. Partial Key Recovery Attack with bits of `d` known
+- [x] Pohlig-Hellman attack for finding discrete logarithms in cyclic multiplicative groups with smooth order
+- [x] Pohlig-Hellman attack for finding discrete logarithms in elliptic curve additive groups with smooth order
+- [ ] Small-subgroup confinement attack
 
-### Diffie Hellman
+### Factoring algorithms (applicable for many public key primitives)
+- [x] [Cheng's 4p - 1 = Ds^2 elliptic curve complex multiplication based factoring](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Public%20Key/Factoring/cm_factor.sage)
 
-#### Finished
-
-1. Pohlig-Hellman attack for finding discrete logarithms in cyclic multiplicative groups with smooth order
-2. Pohlig-Hellman attack for finding discrete logarithms in elliptic curve additive groups with smooth order
+### Elliptic Curves
+- [ ] MOV attack for curves of low embedding degree
 
 ## Symmetric Key Ciphers 
 
 ### AES
 
-#### Finished
+- [x] Byte-at-a-time ECB decryption
+- [x] AES-CBC Padding Oracle
 
-1. Byte-at-a-time ECB decryption
-2. AES-CBC Padding Oracle
-
-### Note:
+### Installing SageMath
 
 SageMath is available on both Windows and Un*x.
 
@@ -57,18 +56,20 @@ http://sagecell.sagemath.org/  (useful as a quick go-to for evaluating Sage code
 CoCalc:  
 https://cocalc.com/  (optimal for hosting personal projects in the cloud)
 
-You may also host your own SageMath server 
+It is also possible to host a personal SageMath server, though I have never tried this.
+
+# Current Notes
+
+The Notes directory contains my notes on miscellaneous cryptography-related topics.  As of now, I have written up a summary of the first few chapters of Craig Costello's [Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf) and a SageMath script demonstrating elliptic curve point addition and doubling in projective coordinates.
 
 # Future Works
 
 ### Existing Attacks
-1. Add Coppersmith's Short Pad Attack as an extension to Franklin-Reiter 
-2. Add OpenSSL parsing support
-3. Add explanations as comments
-4. Optimize existing attack scripts
+1. Implement the small-subgroup confinement attack for Diffie-Hellman and its Elliptic Curve counterpart.
+2. Implement the MOV attack for elliptic curves of low embedding degree.
 
 ### Future Attacks
-1. Boneh-Durfee
+1. Boneh-Durfee attack for `d <= N^0.292`
 2. BLS rogue public key attack
 3. Fault attack on standard (non-CRT) RSA
 4. Small-subgroup confinement attack on Diffie-Hellman
@@ -78,8 +79,9 @@ You may also host your own SageMath server
 8. State recovery on linear feedback shift registers (LFSRs)
 
 ### Miscellaneous
-1. Update this README to better reflect the significant changes that have been made to this repository since a month ago.
-2. (Maybe) Add more general purpose scripts that may prove useful for breaking some cryptographic schemes
+1. Add docstrings to each attack to better describe their functionalities.
+2. Add more general purpose scripts that may prove useful for breaking some cryptographic schemes
+3. Improve overall code quality, efficiency, and consistency
 
 Feel free to let me know if there are any bugs.
 
@@ -91,5 +93,8 @@ A: Most of modern public key cryptography has some roots in Abstract Algebra (pa
 
 # Relevant Links
 
-https://en.wikipedia.org/wiki/Coppersmith%27s_attack  
-https://www.iacr.org/archive/crypto2007/46220372/46220372.pdf
+[General overview of Coppersmith's attack](https://en.wikipedia.org/wiki/Coppersmith%27s_attack)
+[Coron's simplification of Coppersmith's algorithm](https://www.iacr.org/archive/crypto2007/46220372/46220372.pdf)
+[Cheng's 4p - 1 elliptic curve complex multiplication based factoring](https://crocs.fi.muni.cz/_media/public/papers/2019-secrypt-sedlacek.pdf)
+[Craig Costello's Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf)
+[20 years of attacks on RSA](https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf)
