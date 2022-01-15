@@ -173,13 +173,21 @@ if __name__ == "__main__":
     if not res:
         raise ValueError("No roots found.")
     
-    x_0, y_0 = res
-    p_r = p_0 * mask + x_0[0]
-    q_r = q_0 * mask + y_0[0]
+    x_s, y_s = res
+    p_r, q_r = None, None
+
+    # We need to check every combination of roots to find one such that (p_0 * 2^k + x_0)(q_0 * 2^k + y_0) = N.
+    for x_0, y_0 in itertools.product(x_s, y_s):
+        p_r = p_0 * mask + x_0
+        q_r = q_0 * mask + y_0
+
+        if p_r * q_r == N:
+            print(f"Successfully factored N!")
+            print(f"p = {p_r}")
+            print(f"q = {q_r}")
+            break
 
     assert p_r * q_r == N, "Recovered values were incorrect."
 
-    print(f"Successfully factored N!")
-    print(f"p = {p_r}")
-    print(f"q = {q_r}")
+
 
