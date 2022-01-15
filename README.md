@@ -93,9 +93,9 @@ A: Most of modern public key cryptography has some roots in Abstract Algebra (pa
 
 # Relevant Links
 
-[General overview of Coppersmith's attack](https://en.wikipedia.org/wiki/Coppersmith%27s_attack)
-[Coron's simplification of Coppersmith's algorithm](https://www.iacr.org/archive/crypto2007/46220372/46220372.pdf)
-[Cheng's 4p - 1 elliptic curve complex multiplication based factoring](https://crocs.fi.muni.cz/_media/public/papers/2019-secrypt-sedlacek.pdf)
-[Craig Costello's Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf)
-[20 years of attacks on RSA](https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf)
+* [General overview of Coppersmith's attack](https://en.wikipedia.org/wiki/Coppersmith%27s_attack)
+* [Coron's simplification of Coppersmith's algorithm](https://www.iacr.org/archive/crypto2007/46220372/46220372.pdf)
+* [Cheng's 4p - 1 elliptic curve complex multiplication based factoring](https://crocs.fi.muni.cz/_media/public/papers/2019-secrypt-sedlacek.pdf)
+* [Craig Costello's Pairings for Beginners](https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf)
+* [20 years of attacks on RSA](https://crypto.stanford.edu/~dabo/pubs/papers/RSA-survey.pdf)
 
