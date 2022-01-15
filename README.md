@@ -37,8 +37,8 @@ As of yet, there are implementations for attacks against public key and symmetri
 
 ### AES
 
-- [x] Byte-at-a-time ECB decryption
-- [x] AES-CBC Padding Oracle
+- [x] [Byte-at-a-time ECB decryption](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Symmetric%20Key/AES/byte_at_a_time/break_ecb.py)
+- [x] [AES-CBC Padding Oracle](https://github.com/pwang00/Cryptographic-Attacks/blob/master/Symmetric%20Key/AES/padding_oracle/padding_oracle.py)
 
 ### Installing SageMath
 
