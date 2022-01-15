@@ -18,9 +18,7 @@ def coppersmith_bivariate(p, X, Y, k = 2, i_0 = 0, j_0 = 1, debug=True):
     :param i_0: index such that 0 <= i_0 <= deg(p), used to generate monomials x^(i + i_0)*y^(j + j_0)
     :param j_0: index such that 0 <= j_0 <= deg(p), used to generate monomials x^(i + i_0)*y^(j + j_0)
     :param debug: Turns on debugging information
-
-
-    return: The small roots x_0, y_0 of h(x, y) such that |x_0| <= X, |y_0| <= Y, and h(x_0, y_0) = 0 over Z
+    :return: The small roots x_0, y_0 of h(x, y) such that |x_0| <= X, |y_0| <= Y, and h(x_0, y_0) = 0 over Z
     """
     if len(p.variables()) != 2:
         raise ValueError("Given polynomial is not bivariate.")
