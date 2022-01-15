@@ -174,9 +174,10 @@ if __name__ == "__main__":
         raise ValueError("No roots found.")
     
     x_s, y_s = res
-    p_r, q_r = None, None
+    p_r, q_r = 0, 0
 
     # We need to check every combination of roots to find one such that (p_0 * 2^k + x_0)(q_0 * 2^k + y_0) = N.
+    
     for x_0, y_0 in itertools.product(x_s, y_s):
         p_r = p_0 * mask + x_0
         q_r = q_0 * mask + y_0
