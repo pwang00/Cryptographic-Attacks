@@ -50,11 +50,9 @@ To install on Ubuntu and other Linux distros, I believe `sudo apt install sagema
 
 SageMath also has a presence in the cloud:
 
-SageMathCell:  
-http://sagecell.sagemath.org/  (useful as a quick go-to for evaluating Sage code without the need to save, also be mindful of no external connections)
+* [SageMathCell](http://sagecell.sagemath.org/): (useful as a quick go-to for evaluating Sage code without the need to save, also be mindful of no external connections)
 
-CoCalc:  
-https://cocalc.com/  (optimal for hosting personal projects in the cloud)
+* [CoCalc](https://cocalc.com/): (optimal for hosting personal projects in the cloud)
 
 It is also possible to host a personal SageMath server, though I have never tried this.
 
@@ -89,7 +87,7 @@ Feel free to let me know if there are any bugs.
 
 Q: Why use SageMath instead of pure Python?
 
-A: Most of modern public key cryptography has some roots in Abstract Algebra (particularly group and ring theory) as well as number theory.  Sage provides excellent support for both fields of mathematics and provides many useful, time-saving functions so that the vast majority of time can be spent on implementing the actual attack algorithms rather than the structures that they are dependent upon.
+A: Sage provides many convenient number-theoretic functions and constructors for algebraic structures commonly used by or used against cryptographic primitives, such as groups, polynomial rings, fields, and elliptic curves.  This saves a lot of time since it allows focus to be placed solely on implementing attacks and useful general purpose algorithms rather than the structures that they depend upon.
 
 # Relevant Links
 
