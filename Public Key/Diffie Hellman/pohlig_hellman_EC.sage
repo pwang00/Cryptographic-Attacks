@@ -2,7 +2,7 @@
 # However, it can never hurt to implement the algorithm yourself for sake of understanding.
 
 
-def generate_params(B=2^10, num_factors=5):
+def generate_params(B=2^10, num_factors=8):
     """ Generates the public and private parameters for Diffie-Hellman """
 
     # Generates num_factors primes and multiplies them together to form a modulus 
@@ -36,14 +36,13 @@ def generate_params(B=2^10, num_factors=5):
 # style calculation of $x$--namely, we first calculate g^j mod p for every 0 <= j < m, and then calculate g^i mod p for 
 # 0 <= j <= p, multiplying by a^-m for every y not equal to 
 
-def BSGS(G, PA, E):
-    n = E.order()
+def BSGS(G, PA, n, E):
 
     # Normally ceil(sqrt(n)) should work but for some reason some test cases break this
     M = ceil(sqrt(n)) + 1
     y = PA
     log_table = {}
-
+    
     for j in range(M):
         log_table[j] = (j, j * G)
 
@@ -55,7 +54,7 @@ def BSGS(G, PA, E):
                 return i * M + log_table[x][0]
     
         y += inv
-
+        
     return None
 
 # The Pohlig-Hellman attack on Diffie-Hellman works as such:
@@ -80,8 +79,7 @@ def pohlig_hellman_EC(G, PA, E, debug=True):
     for p_i in factors:
         g_i = G * (n // p_i)
         h_i = PA * (n // p_i)
-        x_i = BSGS(g_i, h_i, E)
-
+        x_i = BSGS(g_i, h_i, p_i, E)
         if debug and x_i != None:
             print("[x] Found discrete logarithm %d for factor %d" % (x_i, p_i))
             crt_array += [x_i]

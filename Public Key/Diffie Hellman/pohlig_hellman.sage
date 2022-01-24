@@ -26,9 +26,7 @@ def generate_params(B=2^10, num_factors=15):
 # style calculation of $x$--namely, we first calculate g^j mod p for every 0 <= j < m, and then calculate g^i mod p for 
 # 0 <= j <= p, multiplying by a^-m for every y not equal to 
 
-def BSGS(g, A, G):
-    n = G.order() - 1
-
+def BSGS(g, A, n, G):
     # Normally ceil(sqrt(n)) should work but for some reason some test cases break this
     m = ceil(sqrt(n)) + 1
     y = A
@@ -70,7 +68,7 @@ def pohlig_hellman(g, A, F, debug=True):
     for p_i in factors:
         g_i = g ^ ((p - 1) // p_i)
         h_i = A ^ ((p - 1) // p_i)
-        x_i = BSGS(g_i, h_i, GF(p_i))
+        x_i = BSGS(g_i, h_i, p_i, GF(p_i))
         if debug and x_i != None:
             print("[x] Found discrete logarithm %d for factor %d" % (x_i, p_i))
             crt_array += [x_i]
