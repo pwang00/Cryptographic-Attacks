@@ -155,11 +155,11 @@ if __name__ == "__main__":
     # How many MSBs we want to preserve
     # p // mask * mask zeros out log_2(mask) number of LSBs of p 
     
-    p_0 = (p // mask)
-    q_0 = N // (p_0 * mask) // mask
+    p_0 = (p // mask) * mask
+    q_0 = (N // p_0 // mask) * mask
 
     X, Y = mask << 1, mask << 1
-    poly = (x + p_0 * mask)*(y + q_0 * mask) - N
+    poly = (x + p_0) * (y + q_0) - N
 
     print("--Given arguments--")
     print(f"Size of primes: {prime_size}")
@@ -177,8 +177,8 @@ if __name__ == "__main__":
     # We need to check every combination of roots to find one such that (p_0 * 2^k + x_0)(q_0 * 2^k + y_0) = N.
     
     for x_0, y_0 in itertools.product(x_s, y_s):
-        p_r = p_0 * mask + x_0
-        q_r = q_0 * mask + y_0
+        p_r = p_0 + x_0
+        q_r = q_0 + y_0
 
         if p_r * q_r == N:
             print(f"Successfully factored N!")
